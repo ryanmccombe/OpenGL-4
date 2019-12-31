@@ -4,37 +4,46 @@
 #include "shader.h"
 #include "vao.h"
 #include "window.h"
+#include <vector>
+
+struct RenderObject
+{
+	int ShaderProgram;
+	unsigned int VAO;
+};
 
 template <std::size_t array_size>
-void render(Window* window, unsigned int (&VAOs)[array_size]);
+void render(Window* window, RenderObject (&VAOs)[array_size]);
 
 int main()
 {
 	const auto window = new Window();
 
-	float vertices[] {
-		0.5f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-	};
+	RenderObject objects[]
+	{
+		{
+			Shader::Program("1.0f, 0.5f, 0.2f, 1.0f"),
+			VAO::Triangle(std::vector<float> {
+				0.5f, 0.5f, 0.0f,
+				0.5f, -0.5f, 0.0f,
+				-0.5f, -0.5f, 0.0f,
+			})
+		},
 
-	float vertices2[] {
-		0.5f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, 1.f, 0.0f,
+		{
+			Shader::Program("1.0f, 1.0f, 0.2f, 1.0f"),
+			VAO::Triangle(std::vector<float> {
+				0.5f, 0.5f, 0.0f,
+				0.5f, -0.5f, 0.0f,
+				-0.5f, 1.f, 0.0f,
+			})
+		},
 	};
-
-	unsigned int VAOs[] {
-		VAO::Triangle(vertices, sizeof vertices),
-		VAO::Triangle(vertices2, sizeof vertices2),
-	};
-
-	glUseProgram(Shader::Program());
 	
 	// The render loop
 	while (window->isRunning())
 	{
-		render(window, VAOs);
+		render(window, objects);
 	}
 
 	return 0;
@@ -42,7 +51,7 @@ int main()
 
 // The render loop
 template <std::size_t array_size>
-void render(Window* window, unsigned int (&VAOs)[array_size])
+void render(Window* window, RenderObject (&objects)[array_size])
 {
 	// OpenGL is a state machine - this is a state setting function - we define
 	// the colour to use for all future clears
@@ -53,9 +62,10 @@ void render(Window* window, unsigned int (&VAOs)[array_size])
 	// - we're clearing the colour buffer
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for (auto VAO : VAOs)
+	for (auto object : objects)
 	{
-		glBindVertexArray(VAO);
+		glUseProgram(object.ShaderProgram);
+		glBindVertexArray(object.VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
@@ -66,5 +76,3 @@ void render(Window* window, unsigned int (&VAOs)[array_size])
 	// around
 	glfwSwapBuffers(window->glfwWindow);
 }
-
-

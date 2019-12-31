@@ -1,13 +1,15 @@
 #pragma once
 #include <glad/glad.h>
+#include <string>
+#include <vector>
 
 class Shader
 {
 public:
-	static int Program()
+	static int Program(std::string colour)
 	{
 		auto vertexShader = Shader::vertexShader();
-		auto fragmentShader = Shader::fragmentShader();
+		auto fragmentShader = Shader::fragmentShader(colour);
 		
 		int shaderProgram = glCreateProgram();
 		glAttachShader(shaderProgram, vertexShader);
@@ -44,18 +46,19 @@ private:
 		return vertexShader;
 	}
 
-	static int fragmentShader()
+	static int fragmentShader(std::string colour)
 	{
-		const char* fragmentShaderSource =
+		std::string fragmentShaderSource =
 			"#version 460 core\n"
 			"out vec4 FragColor;\n"
 			"void main()\n"
 			"{\n"
-			"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+			"   FragColor = vec4(" + colour + ");\n"
 			"}\n\0";
 
+		const char* c = fragmentShaderSource.c_str();
 		int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+		glShaderSource(fragmentShader, 1, &c, nullptr);
 		glCompileShader(fragmentShader);
 		// TODO: error checking
 
