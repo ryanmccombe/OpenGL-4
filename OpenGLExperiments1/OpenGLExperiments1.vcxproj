@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="shader.h" />
     <ClInclude Include="vao.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
