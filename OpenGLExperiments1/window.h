@@ -41,14 +41,26 @@ public:
 
 	bool isRunning()
 	{
-		return !glfwWindowShouldClose(glfwWindow);
+		// Check for any events (eg, resize, keyboard input) and invoke appropriate
+		// callbacks
+		glfwPollEvents();
+		
+		processInput();
+
+		if (glfwWindowShouldClose(glfwWindow))
+		{
+			glfwTerminate();
+			return false;
+		}
+		
+		return true;
 	}
 
 private:
-	void processInput(GLFWwindow* window)
+	void processInput()
 	{
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, true);
+		if (glfwGetKey(glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(glfwWindow, true);
 	}
 
 	// This gets called when the window is first created, and every time it is

@@ -5,29 +5,26 @@
 #include "vao.h"
 #include "window.h"
 
-GLFWwindow* initialiseWindow();
-void render(GLFWwindow* window);
+void render(Window* window);
 
 int main()
 {
 	const auto window = new Window();
 
 	glUseProgram(Shader::Program());
-	glBindVertexArray(VAO::Square());
+	glBindVertexArray(VAO::Triangle());
 	
 	// The render loop
 	while (window->isRunning())
 	{
-		render(window->glfwWindow);
+		render(window);
 	}
 
-	// Cleanup
-	glfwTerminate();
 	return 0;
 }
 
 // The render loop
-void render(GLFWwindow* window)
+void render(Window* window)
 {
 	// OpenGL is a state machine - this is a state setting function - we define
 	// the colour to use for all future clears
@@ -38,17 +35,13 @@ void render(GLFWwindow* window)
 	// - we're clearing the colour buffer
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	// glDrawArrays(GL_TRIANGLES, 0, 3);
+	// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	// OpenGL uses double buffers - we display the "front" frame whilst creating
 	// the back frame Once the back frame is complete (ie, now), we swap them
 	// around
-	glfwSwapBuffers(window);
-
-	// Check for any events (eg, resize, keyboard input) and invoke appropriate
-	// callbacks
-	glfwPollEvents();
+	glfwSwapBuffers(window->glfwWindow);
 }
 
 
