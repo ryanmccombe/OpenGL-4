@@ -5,10 +5,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "shader.h"
+
 void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 GLFWwindow* initialiseWindow();
 void initialiseGLAD();
-int initialiseShader();
 unsigned int initialiseVAO();
 void render(GLFWwindow* window);
 void processInput(GLFWwindow* window);
@@ -21,7 +22,7 @@ int main()
 	const auto window = initialiseWindow();
 	initialiseGLAD();
 
-	glUseProgram(initialiseShader());
+	glUseProgram(Shader::Program());
 	glBindVertexArray(initialiseVAO());
 	
 	// The render loop
@@ -73,52 +74,6 @@ void initialiseGLAD()
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
 	}
-}
-
-int initialiseShader()
-{
-	// GLSL code
-	// We simply use the position in the incoming vertex attributes,
-	// as they're already in the normalised device co-ordinates
-	const char* vertexShaderSource =
-		"#version 460 core\n"
-		"layout (location = 0) in vec3 aPos;\n"
-		"void main()\n"
-		"{\n"
-		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-		"}\0";
-	const char* fragmentShaderSource =
-		"#version 460 core\n"
-		"out vec4 FragColor;\n"
-		"void main()\n"
-		"{\n"
-		"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-		"}\n\0";
-
-	// Compile the vertex shader
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-	glCompileShader(vertexShader);
-	// TODO: error check shader compilation
-
-	// Compile the fragment shader
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-	glCompileShader(fragmentShader);
-	// TODO: error check shader compilation
-
-	// Link the shaders into a new program
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	// TODO: error check linking
-
-	// Cleanup - the shaders can be deleted once they're compiled and linked
-	glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-	
-	return shaderProgram;
 }
 
 unsigned int initialiseVAO()
