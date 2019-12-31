@@ -13,7 +13,7 @@ struct RenderObject
 };
 
 template <std::size_t array_size>
-void render(Window* window, RenderObject (&VAOs)[array_size]);
+void render(Window* window, RenderObject (&objectsToRender)[array_size]);
 
 int main()
 {
@@ -51,7 +51,7 @@ int main()
 
 // The render loop
 template <std::size_t array_size>
-void render(Window* window, RenderObject (&objects)[array_size])
+void render(Window* window, RenderObject (&objectsToRender)[array_size])
 {
 	// OpenGL is a state machine - this is a state setting function - we define
 	// the colour to use for all future clears
@@ -62,7 +62,7 @@ void render(Window* window, RenderObject (&objects)[array_size])
 	// - we're clearing the colour buffer
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for (auto object : objects)
+	for (auto object : objectsToRender)
 	{
 		glUseProgram(object.ShaderProgram);
 		glBindVertexArray(object.VAO);
