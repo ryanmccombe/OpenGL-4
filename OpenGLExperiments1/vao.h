@@ -17,9 +17,20 @@ public:
 
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), static_cast<void*>(nullptr));
+
+		glVertexAttribPointer(
+			1, // The attribute being configured - this maps to location = 1 in the vertex shader
+			3, // The number of elements in each vertex attribute
+			GL_FLOAT, // The type of each element
+			GL_FALSE, // Whether we need them normalised when accessed - we don't
+			6 * sizeof(float), // The space between verts
+			reinterpret_cast<void*>(3 * sizeof(float))
+			// The offset of where the colour data begins
+		);
 
 		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glBindVertexArray(0);

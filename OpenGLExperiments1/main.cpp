@@ -1,5 +1,5 @@
 // Hides the console in Windows
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+// #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
 #include "shader.h"
 #include "vao.h"
@@ -8,7 +8,7 @@
 
 struct RenderObject
 {
-	int ShaderProgram;
+	Shader Shader;
 	unsigned int VAO;
 };
 
@@ -19,25 +19,18 @@ int main()
 {
 	const auto window = new Window();
 
+	const Shader shader("../../vertex.shader", "../../fragment.shader");
+
 	RenderObject objects[]
 	{
 		{
-			Shader::Program("1.0f, 0.5f, 0.2f, 1.0f"),
+			shader,
 			VAO::Triangle(std::vector<float> {
-				0.5f, 0.5f, 0.0f,
-				0.5f, -0.5f, 0.0f,
-				-0.5f, -0.5f, 0.0f,
+				0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+				0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 			})
-		},
-
-		{
-			Shader::Program("1.0f, 1.0f, 0.2f, 1.0f"),
-			VAO::Triangle(std::vector<float> {
-				0.5f, 0.5f, 0.0f,
-				0.5f, -0.5f, 0.0f,
-				-0.5f, 1.f, 0.0f,
-			})
-		},
+		}
 	};
 	
 	// The render loop
@@ -64,7 +57,7 @@ void render(Window* window, RenderObject (&objectsToRender)[array_size])
 
 	for (auto object : objectsToRender)
 	{
-		glUseProgram(object.ShaderProgram);
+		// object.Shader.Use();
 		glBindVertexArray(object.VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}

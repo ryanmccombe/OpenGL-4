@@ -27,6 +27,10 @@
     <ClInclude Include="vao.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment.shader" />
+    <None Include="vertex.shader" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{0197BCFC-4FC2-49FB-B9DF-CBC78992A347}</ProjectGuid>
