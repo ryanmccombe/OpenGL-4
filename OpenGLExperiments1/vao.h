@@ -43,10 +43,11 @@ public:
 		// (0, 0) is the centre of the screen
 		// We have the same z co-ordinate / depth for each vertex, to simulate a 2D triangle
 		float vertices[] = {
-			0.5f, 0.5f, 0.0f, // top right
-			0.5f, -0.5f, 0.0f, // bottom right
-			-0.5f, -0.5f, 0.0f, // bottom left
-			-0.5f, 0.5f, 0.0f // top left 
+		// positions          // colors           // texture coords
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,  0.0f, 0.0f,   // bottom left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,  0.0f, 1.0f    // top left 
 		};
 		unsigned int indices[] = {
 			0, 1, 3, // first Triangle
@@ -80,13 +81,26 @@ public:
 			3, // The number of elements in each vertex - we're using a vec3
 			GL_FLOAT, // The type of each element
 			GL_FALSE, // Whether we need them normalised when accessed - we don't
-			3 * sizeof(float), // The space between verts
-			static_cast<void*>(nullptr)
-			// The offset of where the position data begins - our position data is at the start
+			8 * sizeof(float), // The space between verts
+			static_cast<void*>(nullptr) // The offset of where the position data begins
+		);
+
+		// color attribute
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
+		glVertexAttribPointer(
+			2, // The attribute being configured - this maps to location = 2 in the vertex shader
+			2, // The number of elements in each vertex - we're using a vec3
+			GL_FLOAT, // The type of each element
+			GL_FALSE, // Whether we need them normalised when accessed - we don't
+			8 * sizeof(float), // The space between verts
+			reinterpret_cast<void*>(6 * sizeof(float)) // The offset for where UV data begins
 		);
 
 		// Enable the vertex attribute, using the index we set (maps to the 1st arg of glVertexAttribPointer)
 		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(2);
 
 		// the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object
 		// so we can unbind our VBO

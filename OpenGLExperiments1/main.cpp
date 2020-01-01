@@ -6,6 +6,9 @@
 #include "window.h"
 #include <vector>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 struct RenderObject
 {
 	Shader Shader;
@@ -20,19 +23,17 @@ int main()
 	const auto window = new Window();
 
 	const Shader shader("../../vertex.shader", "../../fragment.shader");
+	shader.AddTexture("../../container.jpg");
+	shader.AddTexture("../../thinking.png", GL_RGBA, GL_TEXTURE1);
 
 	RenderObject objects[]
 	{
 		{
 			shader,
-			VAO::Triangle(std::vector<float> {
-				0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-				0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-			})
+			VAO::Square()
 		}
 	};
-	
+
 	// The render loop
 	while (window->isRunning())
 	{
@@ -59,10 +60,8 @@ void render(Window* window, RenderObject (&objectsToRender)[array_size])
 	{
 		// object.Shader.Use();
 		glBindVertexArray(object.VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
-
-	// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	// OpenGL uses double buffers - we display the "front" frame whilst creating
 	// the back frame Once the back frame is complete (ie, now), we swap them

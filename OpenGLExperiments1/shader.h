@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "texture.h"
 
 class Shader
 {
@@ -41,6 +42,10 @@ public:
 		{
 			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
 		}
+
+		// TODO: manage this dynamically
+		setInt("texture1", 0);
+		setInt("texture2", 1);
 	}
 
 	void Use() const
@@ -49,15 +54,27 @@ public:
 		glUseProgram(ID);
 	}
 
-	void setVec4(const std::string &name, float x, float y, float z, float w) const
+	void AddTexture(char const* path, GLenum dataType = GL_RGB, GLenum textureUnit = GL_TEXTURE0, GLenum wrapping = GL_REPEAT) const
+	{
+		const Texture texture1(path, dataType, textureUnit, wrapping);
+	}
+
+	void setInt(const std::string &name, int x) const
 	{ 
-        glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w); 
+        glUniform1i(glGetUniformLocation(ID, name.c_str()), x); 
     }
 
 	void setFloat(const std::string &name, float x) const
 	{ 
         glUniform1f(glGetUniformLocation(ID, name.c_str()), x); 
     }
+
+	void setVec4(const std::string &name, float x, float y, float z, float w) const
+	{ 
+        glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w); 
+    }
+
+	
 
 private:
 	unsigned int vertexShader;
