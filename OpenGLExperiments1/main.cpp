@@ -6,6 +6,10 @@
 #include "window.h"
 #include <vector>
 
+#include <glm/vec4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -58,9 +62,16 @@ void render(Window* window, RenderObject (&objectsToRender)[array_size])
 
 	for (auto object : objectsToRender)
 	{
+		// TODO: this is experimental matrix transformation code
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = rotate(trans, float(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
+		trans = scale(trans, glm::vec3(1.5, 1.5, 1.5));
+		object.Shader.setMatrix("transformation", value_ptr(trans));
+		// TODO: end of test code
+
 		// object.Shader.Use();
 		glBindVertexArray(object.VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
 
 	// OpenGL uses double buffers - we display the "front" frame whilst creating
