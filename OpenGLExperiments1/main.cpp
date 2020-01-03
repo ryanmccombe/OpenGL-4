@@ -6,7 +6,6 @@
 #include "window.h"
 #include <vector>
 
-#include <glm/vec4.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -38,6 +37,8 @@ int main()
 		}
 	};
 
+	glEnable(GL_DEPTH_TEST);
+
 	// The render loop
 	while (window->isRunning())
 	{
@@ -58,20 +59,30 @@ void render(Window* window, RenderObject (&objectsToRender)[array_size])
 	// And then we do the clearing - this will use whatever clear colour is
 	// currently in state This function wants to know the buffer we want to clear
 	// - we're clearing the colour buffer
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (auto object : objectsToRender)
 	{
 		// TODO: this is experimental matrix transformation code
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = rotate(trans, float(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
-		trans = scale(trans, glm::vec3(1.5, 1.5, 1.5));
-		object.Shader.setMatrix("transformation", value_ptr(trans));
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+		glm::mat4 view = glm::mat4(1.0f);
+		// note that we're translating the scene in the reverse direction of where we want to move
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+		glm::mat4 projection;
+		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		
+		object.Shader.setMatrix("model", glm::value_ptr(model));
+		object.Shader.setMatrix("view", glm::value_ptr(view));
+		object.Shader.setMatrix("projection", glm::value_ptr(projection));
 		// TODO: end of test code
 
-		// object.Shader.Use();
-		glBindVertexArray(object.VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		object.Shader.Use();
+		// glBindVertexArray(object.VAO);
+		// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		VAO::DrawTestCubes(&object.Shader, window);
 	}
 
 	// OpenGL uses double buffers - we display the "front" frame whilst creating

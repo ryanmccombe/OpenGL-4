@@ -7,11 +7,15 @@ out vec3 vertexColor;
 out vec3 vertexPosition;
 out vec2 TexCoord;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 uniform mat4 transformation;
 
 void main()
 {
-    gl_Position = transformation * vec4(position, 1.0);
+    // note that we read the multiplication from right to left
+    gl_Position = projection * view * model * transformation * vec4(position, 1.0);
 	vertexColor = color;
 	vertexPosition = position;
 	TexCoord = aTexCoord;
