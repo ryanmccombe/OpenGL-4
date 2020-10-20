@@ -1,12 +1,11 @@
 // Hides the console in Windows
 // #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
-#include "shader.h"
+#include "Renderer/Shader/shader.h"
 #include "Renderer/Scene/Examples/SpinningCubes.h"
-#include "window.h"
+#include "Window/window.h"
 #include <vector>
 
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -21,11 +20,11 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("../../vertex.shader", "../../fragment.shader");
-	shader.AddTexture("../../container.jpg");
-	shader.AddTexture("../../thinking.png", GL_RGBA, GL_TEXTURE1);
+	Shader shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");
+	shader.AddTexture("../../Renderer/Texture/container.jpg");
+	shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
 
-	// The render loop
+
 	while (window->isRunning())
 	{
 		render(window, &shader);
@@ -34,7 +33,6 @@ int main()
 	return 0;
 }
 
-// The render loop
 void render(Window* window, Shader* shader)
 {
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);

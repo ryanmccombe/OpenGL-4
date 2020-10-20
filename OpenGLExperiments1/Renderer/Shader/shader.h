@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "texture.h"
+#include "../Texture/texture.h"
 
 class Shader
 {
@@ -50,7 +50,6 @@ public:
 
 	void Use() const
 	{
-		// std::cout << "Using " << ID << std::endl;
 		glUseProgram(ID);
 	}
 

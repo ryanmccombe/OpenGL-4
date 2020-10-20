@@ -26,19 +26,19 @@
     <ClInclude Include="Renderer\Camera\Camera.h" />
     <ClInclude Include="Renderer\Camera\Examples\SpinningCamera.h" />
     <ClInclude Include="Renderer\Mesh\Cube.h" />
-    <ClInclude Include="shader.h" />
-    <ClInclude Include="texture.h" />
+    <ClInclude Include="Renderer\Shader\shader.h" />
+    <ClInclude Include="Renderer\Texture\texture.h" />
     <ClInclude Include="Renderer\Scene\Examples\SpinningCubes.h" />
-    <ClInclude Include="window.h" />
+    <ClInclude Include="Window\window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.shader" />
-    <None Include="vertex.shader" />
+    <None Include="Renderer\Shader\fragment.shader" />
+    <None Include="Renderer\Shader\vertex.shader" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="awesomeface.png" />
-    <Image Include="container.jpg" />
-    <Image Include="thinking.png" />
+    <Image Include="Renderer\Texture\awesomeface.png" />
+    <Image Include="Renderer\Texture\container.jpg" />
+    <Image Include="Renderer\Texture\thinking.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

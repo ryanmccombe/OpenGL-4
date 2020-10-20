@@ -2,8 +2,8 @@
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "../../../shader.h"
-#include "../../../window.h"
+#include "../../Shader/shader.h"
+#include "../../../Window/window.h"
 #include "../../Mesh/Cube.h"
 
 class SpinningCubes
