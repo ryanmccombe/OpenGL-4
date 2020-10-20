@@ -4,6 +4,7 @@
 class Camera
 {
 public:
+	virtual void Update() {};
 	glm::mat4 view;
 	glm::mat4 projection;
 };

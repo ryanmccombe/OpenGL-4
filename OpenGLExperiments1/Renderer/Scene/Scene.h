@@ -1,36 +1,22 @@
 #pragma once
 #include "../Shader/shader.h"
-#include "../Mesh/Mesh.h"
 #include "../GeometrySet/GeometrySet.h"
 #include "../Camera/Examples/SpinningCamera.h"
 
+// TODO: move ShaderGroup to own file
 class ShaderGroup
 {
 public:
+	// TODO: remove unnecessary constructor
 	ShaderGroup(Shader* _shader, GeometrySet* _geo)
 	{
-		std::cout << "constructing shadergroup" << std::endl;
 		shader = _shader;
 		geo = _geo;
 	}
 	void Render()
 	{
-		// std::cout << "rendering in shadergroup" << std::endl;
-		if (shader == nullptr)
-		{
-			std::cout << "shader is null" << std::endl;
-		} else
-		{
-			shader->Use();
-		}
-		
-		if (geo == nullptr || shader == nullptr)
-		{
-			std::cout << "geo is null" << std::endl;
-		} else
-		{
-			geo->Draw(shader);
-		}
+		shader->Use();
+		geo->Draw(shader);
 	}
 
     Shader* shader = nullptr;
@@ -44,13 +30,17 @@ public:
 	{
 		if(!ShaderGroups.empty())
 		{
+			// TODO: render all groups
 			ShaderGroups[0].Render();
 		} else {
+			// TODO: implement logging system
 			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;
 		}
 		Camera.Update();
 	}
 
 	std::vector<ShaderGroup> ShaderGroups;
+
+	// TODO: use standard camera by default
 	SpinningCamera Camera;
 };

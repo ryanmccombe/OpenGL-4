@@ -25,12 +25,13 @@ public:
 			glm::vec3(-1.3f, 1.0f, -1.5f)
 		};
 
-		Cube myCube;
-		myCube.Bind();
+		Cube ExampleCube;
+		ExampleCube.Bind();
 
 		glm::mat4 identityTransform = glm::mat4(1.0f);
 		glm::mat4 spinnyTransform = glm::rotate(identityTransform, float(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
 
+		// TODO: instance this instead of 10 draw calls
 		for (unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);

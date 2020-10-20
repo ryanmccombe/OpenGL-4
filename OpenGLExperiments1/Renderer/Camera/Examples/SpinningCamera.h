@@ -12,7 +12,7 @@ public:
 		Update();
 	}
 
-	void Update()
+	void Update() override
 	{
 		const float radius = 10.0f;
 		float camX = sin(glfwGetTime()) * radius;
