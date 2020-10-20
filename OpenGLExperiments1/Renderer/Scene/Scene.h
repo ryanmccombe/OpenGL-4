@@ -30,7 +30,6 @@ public:
 		} else
 		{
 			geo->Draw(shader);
-			geo->Hello();
 		}
 	}
 
@@ -43,7 +42,13 @@ class Scene
 public:
 	virtual void Render()
 	{
-		
+		if(!ShaderGroups.empty())
+		{
+			ShaderGroups[0].Render();
+		} else {
+			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;
+		}
+		Camera.Update();
 	}
 
 	std::vector<ShaderGroup> ShaderGroups;

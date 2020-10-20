@@ -8,6 +8,12 @@ class SpinningCamera : public Camera
 public:
 	SpinningCamera()
 	{
+		std::cout << "Constructed spinning camera" << std::endl;
+		Update();
+	}
+
+	void Update()
+	{
 		const float radius = 10.0f;
 		float camX = sin(glfwGetTime()) * radius;
 		float camZ = cos(glfwGetTime()) * radius;

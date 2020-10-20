@@ -10,29 +10,22 @@ class SpinningCubesScene : public Scene
 public:
 	SpinningCubesScene()
 	{
+		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
 	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
-		shader.setMatrix("view", glm::value_ptr(camera.view));
-		shader.setMatrix("projection", glm::value_ptr(camera.projection));
-
-		std::cout << "GeoSet created" << std::endl;
+		shader.setMatrix("view", glm::value_ptr(Camera.view));
+		shader.setMatrix("projection", glm::value_ptr(Camera.projection));
 
 		ShaderGroups.assign(1, ShaderGroup(&shader, &geo));
 	}
 
-	void Render()
+	void Render() override
 	{
-		// std::cout << "rendering in spinning cubes scene" << std::endl;
-		if(ShaderGroups.size() == 1)
-		{
-			ShaderGroups[0].Render();
-		} else {
-			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;
-		}
-		
+		Scene::Render();
+		shader.setMatrix("view", glm::value_ptr(Camera.view));
+		shader.setMatrix("projection", glm::value_ptr(Camera.projection));
 	}
 
 	Shader shader = Shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");
 	SpinningCubesGeometrySet geo;
-	SpinningCamera camera;
 };
