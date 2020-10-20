@@ -15,17 +15,23 @@ public:
 	}
 	void Render()
 	{
-		SpinningCamera camera;
-		Shader shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");
-	    shader.AddTexture("../../Renderer/Texture/container.jpg");
-	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
-		shader.setMatrix("view", glm::value_ptr(camera.view));
-		shader.setMatrix("projection", glm::value_ptr(camera.projection));
-
-		SpinningCubesGeometrySet geo;
-
-		shader.Use();
-		geo.Draw(&shader);
+		// std::cout << "rendering in shadergroup" << std::endl;
+		if (shader == nullptr)
+		{
+			std::cout << "shader is null" << std::endl;
+		} else
+		{
+			shader->Use();
+		}
+		
+		if (geo == nullptr || shader == nullptr)
+		{
+			std::cout << "geo is null" << std::endl;
+		} else
+		{
+			geo->Draw(shader);
+			geo->Hello();
+		}
 	}
 
     Shader* shader = nullptr;
