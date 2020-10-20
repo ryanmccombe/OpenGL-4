@@ -29,7 +29,7 @@ int main()
 	{
 		render(window, &shader);
 	}
-
+	system("pause");
 	return 0;
 }
 

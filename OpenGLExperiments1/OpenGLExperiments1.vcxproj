@@ -25,7 +25,9 @@
   <ItemGroup>
     <ClInclude Include="Renderer\Camera\Camera.h" />
     <ClInclude Include="Renderer\Camera\Examples\SpinningCamera.h" />
-    <ClInclude Include="Renderer\Mesh\Cube.h" />
+    <ClInclude Include="Renderer\Mesh\Examples\Cube.h" />
+    <ClInclude Include="Renderer\Mesh\Mesh.h" />
+    <ClInclude Include="Renderer\Scene\ShaderGroup.h" />
     <ClInclude Include="Renderer\Shader\shader.h" />
     <ClInclude Include="Renderer\Texture\texture.h" />
     <ClInclude Include="Renderer\Scene\Examples\SpinningCubes.h" />

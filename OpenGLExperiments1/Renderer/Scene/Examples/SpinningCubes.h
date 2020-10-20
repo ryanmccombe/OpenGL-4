@@ -4,7 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "../../Shader/shader.h"
 #include "../../../Window/window.h"
-#include "../../Mesh/Cube.h"
+#include "../../Mesh/Examples/Cube.h"
 
 class SpinningCubes
 {
@@ -23,20 +23,21 @@ public:
 			glm::vec3(1.5f, 0.2f, -1.5f),
 			glm::vec3(-1.3f, 1.0f, -1.5f)
 		};
-		
-		Cube::Bind();
+
+		Cube myCube;
+		myCube.Bind();
 
 		glm::mat4 identityTransform = glm::mat4(1.0f);
+		glm::mat4 spinnyTransform = glm::rotate(identityTransform, float(glfwGetTime()), glm::vec3(0.0, 0.0, 1.0));
 
 		for (unsigned int i = 0; i < 10; i++)
         {
-            // calculate the model matrix for each object and pass it to shader before drawing
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * i;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 			shader->setMatrix("model", glm::value_ptr(model));
-			shader->setMatrix("transformation", value_ptr(identityTransform));
+			shader->setMatrix("transformation", value_ptr(spinnyTransform));
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
