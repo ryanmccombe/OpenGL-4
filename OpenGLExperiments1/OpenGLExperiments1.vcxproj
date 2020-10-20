@@ -23,6 +23,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Renderer\Camera\Camera.h" />
+    <ClInclude Include="Renderer\Camera\Examples\SpinningCamera.h" />
     <ClInclude Include="Renderer\Mesh\Cube.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture.h" />
