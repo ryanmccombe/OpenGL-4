@@ -26,7 +26,7 @@
     <ClInclude Include="Renderer\Mesh\Cube.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture.h" />
-    <ClInclude Include="vao.h" />
+    <ClInclude Include="Renderer\Scene\Examples\SpinningCubes.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
