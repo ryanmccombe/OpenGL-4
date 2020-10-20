@@ -1,9 +1,9 @@
 #pragma once
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "../Camera.h"
 
-class SpinningCamera
+class SpinningCamera : public Camera
 {
 public:
 	SpinningCamera()
@@ -15,7 +15,4 @@ public:
 
 		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 	}
-
-	glm::mat4 view;
-	glm::mat4 projection;
 };

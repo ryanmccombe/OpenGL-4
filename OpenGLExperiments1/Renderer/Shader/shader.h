@@ -50,6 +50,7 @@ public:
 
 	void Use() const
 	{
+		// std::cout << "using shader" << ID << std::endl;
 		glUseProgram(ID);
 	}
 

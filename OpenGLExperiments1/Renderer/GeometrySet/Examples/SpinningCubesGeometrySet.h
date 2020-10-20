@@ -5,11 +5,12 @@
 #include "../../Shader/shader.h"
 #include "../../../Window/window.h"
 #include "../../Mesh/Examples/Cube.h"
+#include "../GeometrySet.h"
 
-class SpinningCubes
+class SpinningCubesGeometrySet : public GeometrySet
 {
 public:
-	static void Draw(Shader* shader, Window* window)
+	void Draw(Shader* shader) 
 	{
 		glm::vec3 cubePositions[] = {
 			glm::vec3(0.0f, 0.0f, 0.0f),

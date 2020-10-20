@@ -4,10 +4,6 @@
 class Camera
 {
 public:
-	Camera()
-	{
-		
-	}
 	glm::mat4 view;
 	glm::mat4 projection;
 };
