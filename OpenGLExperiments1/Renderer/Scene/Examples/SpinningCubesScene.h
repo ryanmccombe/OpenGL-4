@@ -8,8 +8,9 @@
 class SpinningCubesScene : public Scene
 {
 public:
-	SpinningCubesScene()
+	SpinningCubesScene(const Window* _window)
 	{
+		window = _window;
 		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
 	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
@@ -19,9 +20,10 @@ public:
 		ShaderGroups.assign(1, ShaderGroup(&shader, &geo));
 	}
 
-	void Render() override
+	void Render(double mousePos[3]) override
 	{
-		Scene::Render();
+		Scene::Render(mousePos);
+		Camera.ProcessInput(window);
 		UpdateShaderFromCamera();
 	}
 
@@ -30,6 +32,8 @@ public:
 		shader.setMatrix("view", glm::value_ptr(Camera.view));
 		shader.setMatrix("projection", glm::value_ptr(Camera.projection));
 	}
+
+	const Window* window;
 
 	// TODO: better way of initialising this?
 	Shader shader = Shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");

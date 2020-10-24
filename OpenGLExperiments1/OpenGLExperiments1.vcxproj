@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\Camera\Camera.h" />
+    <ClInclude Include="Renderer\Camera\Examples\FPSCamera.h" />
     <ClInclude Include="Renderer\Camera\Examples\SpinningCamera.h" />
     <ClInclude Include="Renderer\GeometrySet\GeometrySet.h" />
     <ClInclude Include="Renderer\Mesh\Examples\Cube.h" />
