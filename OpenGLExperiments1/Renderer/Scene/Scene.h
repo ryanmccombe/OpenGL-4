@@ -8,19 +8,19 @@ class ShaderGroup
 {
 public:
 	// TODO: remove unnecessary constructor
-	ShaderGroup(Shader* shader, GeometrySet* geo) : shader { shader }, geo { geo} { }
+	ShaderGroup(Shader& shader, GeometrySet& geo) : shader { shader }, geo { geo} { }
 	~ShaderGroup()
 	{
 		std::cout << "Destructed ShaderGroup" << std::endl;
 	}
 	void Render(std::vector<double> mousePos)
 	{
-		shader->Use();
-		geo->Draw(shader);
+		shader.Use();
+		geo.Draw(shader);
 	}
 
-    Shader* shader = nullptr;
-	GeometrySet* geo = nullptr;
+    Shader& shader;
+	GeometrySet& geo;
 };
 
 class Scene

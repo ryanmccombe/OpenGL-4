@@ -18,7 +18,7 @@ public:
 	{
 		std::cout << "Destructing SpinningCubesGeometrySet" << std::endl;
 	}
-	void Draw(Shader* shader) 
+	void Draw(Shader& shader) override
 	{
 		glm::vec3 cubePositions[] = {
 			glm::vec3(0.0f, 0.0f, 0.0f),
@@ -45,8 +45,8 @@ public:
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * i;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-			shader->setMatrix("model", glm::value_ptr(model));
-			shader->setMatrix("transformation", value_ptr(spinnyTransform));
+			shader.setMatrix("model", glm::value_ptr(model));
+			shader.setMatrix("transformation", value_ptr(spinnyTransform));
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

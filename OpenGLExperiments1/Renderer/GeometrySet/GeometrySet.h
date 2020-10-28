@@ -10,5 +10,5 @@ public:
 	{
 		std::cout << "Destructing GeometrySet" << std::endl;
 	}
-	virtual void Draw(Shader* shader) {};
+	virtual void Draw(Shader& shader) {};
 };
