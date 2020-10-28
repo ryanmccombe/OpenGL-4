@@ -8,9 +8,8 @@
 class SpinningCubesScene : public Scene
 {
 public:
-	SpinningCubesScene(const Window* _window)
+	SpinningCubesScene(const Window* window) : window { window }
 	{
-		window = _window;
 		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
 	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);

@@ -9,11 +9,7 @@ class ShaderGroup
 {
 public:
 	// TODO: remove unnecessary constructor
-	ShaderGroup(Shader* _shader, GeometrySet* _geo)
-	{
-		shader = _shader;
-		geo = _geo;
-	}
+	ShaderGroup(Shader* shader, GeometrySet* geo) : shader { shader }, geo { geo} { }
 	void Render(std::vector<double> mousePos)
 	{
 		shader->Use();
