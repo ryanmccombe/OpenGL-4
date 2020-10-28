@@ -8,7 +8,7 @@
 class SpinningCubesScene : public Scene
 {
 public:
-	SpinningCubesScene(const Window* window) : window { window }
+	SpinningCubesScene(Window& window) : Scene { window }, window { window }
 	{
 		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
@@ -32,7 +32,7 @@ public:
 		shader.setMatrix("projection", glm::value_ptr(Camera.projection));
 	}
 
-	const Window* window;
+	Window& window;
 
 	// TODO: better way of initialising this?
 	Shader shader = Shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");

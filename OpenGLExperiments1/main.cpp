@@ -11,8 +11,6 @@
 // xpos, ypos, YScrollOffset
 std::vector<double> mousePos = {0,0,0.5f};
 
-void render(Window*, Scene*);
-
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	// std::cout << "mouse callback" << std::endl;
@@ -28,33 +26,34 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	if (mousePos[2] < 0.f) mousePos[2] = 0.f;
 }
 
+void render(Window& window, Scene& scene)
+{
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	scene.Render(mousePos);
+	
+	glfwSwapBuffers(window.glfwWindow);
+}
+
 int main()
 {
-	const auto window = new Window();
-	glfwFocusWindow(window->glfwWindow);
-	glfwSetWindowPos(window->glfwWindow, 800, 300);
+	Window window {};
+	SpinningCubesScene Scene { window };
+
+	glfwFocusWindow(window.glfwWindow);
+	glfwSetWindowPos(window.glfwWindow, 800, 300);
 	
-	auto Scene = new SpinningCubesScene(window);
-	glfwSetInputMode(window->glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetCursorPosCallback(window->glfwWindow, mouse_callback);
-	glfwSetScrollCallback(window->glfwWindow, scroll_callback); 
-	glfwSetCursorPos(window->glfwWindow, 0,0);
+	glfwSetInputMode(window.glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window.glfwWindow, mouse_callback);
+	glfwSetScrollCallback(window.glfwWindow, scroll_callback); 
+	glfwSetCursorPos(window.glfwWindow, 0,0);
 	
 	glEnable(GL_DEPTH_TEST);
-	while (window->isRunning())
+	while (window.isRunning())
 	{
 		render(window, Scene);
 	}
 	
 	return 0;
-}
-
-void render(Window* window, Scene* scene)
-{
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	scene->Render(mousePos);
-	
-	glfwSwapBuffers(window->glfwWindow);
 }

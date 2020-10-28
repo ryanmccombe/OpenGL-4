@@ -8,15 +8,15 @@
 class FPSCamera : public Camera
 {
 public:
-	FPSCamera()
+	FPSCamera(Window& window) : window { window }
 	{
 		std::cout << "Constructed spinning camera" << std::endl;
 		// Update(std::pair<double, double>{0, 0});
 	}
 
-	const Window* window;
+	Window& window;
 
-	void ProcessInput(const Window* _window)
+	void ProcessInput(Window& _window)
 	{
 		window = _window;
 
@@ -26,13 +26,13 @@ public:
 		lastFrame = currentFrame;
 		const float cameraSpeed = 4.0f * deltaTime;
 
-		if (glfwGetKey(window->glfwWindow, GLFW_KEY_W) == GLFW_PRESS)
+		if (glfwGetKey(window.glfwWindow, GLFW_KEY_W) == GLFW_PRESS)
 			cameraPos += cameraSpeed * cameraFront;
-		if (glfwGetKey(window->glfwWindow, GLFW_KEY_S) == GLFW_PRESS)
+		if (glfwGetKey(window.glfwWindow, GLFW_KEY_S) == GLFW_PRESS)
 			cameraPos -= cameraSpeed * cameraFront;
-		if (glfwGetKey(window->glfwWindow, GLFW_KEY_A) == GLFW_PRESS)
+		if (glfwGetKey(window.glfwWindow, GLFW_KEY_A) == GLFW_PRESS)
 			cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-		if (glfwGetKey(window->glfwWindow, GLFW_KEY_D) == GLFW_PRESS)
+		if (glfwGetKey(window.glfwWindow, GLFW_KEY_D) == GLFW_PRESS)
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	}
 

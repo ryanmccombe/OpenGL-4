@@ -23,6 +23,7 @@ public:
 class Scene
 {
 public:
+	Scene(Window& window) : Camera { FPSCamera { window }} {}
 	virtual void Render(std::vector<double>& mousePos)
 	{
 		if(!ShaderGroups.empty())
