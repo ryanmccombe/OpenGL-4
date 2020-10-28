@@ -13,7 +13,7 @@ public:
 	{
 		std::cout << "Destructed ShaderGroup" << std::endl;
 	}
-	void Render(std::vector<double> mousePos)
+	void Render()
 	{
 		shader.Use();
 		geo.Draw(shader);
@@ -26,7 +26,10 @@ public:
 class Scene
 {
 public:
-	Scene(Window& window) : Camera { FPSCamera { window }} {}
+	Scene(Window& window) : Camera { FPSCamera { window }}
+	{
+		std::cout << "Constructed Scene" << std::endl;
+	}
 	~Scene()
 	{
 		std::cout << "Destructed Scene" << std::endl;
@@ -36,7 +39,7 @@ public:
 		if(!ShaderGroups.empty())
 		{
 			// TODO: render all groups
-			ShaderGroups[0]->Render(mousePos);
+			ShaderGroups[0]->Render();
 		} else {
 			// TODO: implement logging system
 			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;
