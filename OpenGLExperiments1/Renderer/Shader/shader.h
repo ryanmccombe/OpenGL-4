@@ -13,6 +13,8 @@ public:
 
 	Shader(const char* vertexPath, const char* fragmentPath)
 	{
+		std::cout << "Constructing Shader" << std::endl;
+		
 		// 1. retrieve the vertex/fragment source code from filePath
 		std::ifstream vShaderFile;
 		std::ifstream fShaderFile;

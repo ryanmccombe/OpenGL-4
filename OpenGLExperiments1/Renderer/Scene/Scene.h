@@ -10,6 +10,10 @@ class ShaderGroup
 public:
 	// TODO: remove unnecessary constructor
 	ShaderGroup(Shader* shader, GeometrySet* geo) : shader { shader }, geo { geo} { }
+	~ShaderGroup()
+	{
+		std::cout << "Destructed ShaderGroup" << std::endl;
+	}
 	void Render(std::vector<double> mousePos)
 	{
 		shader->Use();
@@ -24,6 +28,10 @@ class Scene
 {
 public:
 	Scene(Window& window) : Camera { FPSCamera { window }} {}
+	~Scene()
+	{
+		std::cout << "Destructed Scene" << std::endl;
+	}
 	virtual void Render(std::vector<double>& mousePos)
 	{
 		if(!ShaderGroups.empty())

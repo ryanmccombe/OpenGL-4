@@ -10,6 +10,14 @@
 class SpinningCubesGeometrySet : public GeometrySet
 {
 public:
+	SpinningCubesGeometrySet()
+	{
+		std::cout << "Constructing SpinningCubesGeometrySet" << std::endl;
+	}
+	~SpinningCubesGeometrySet()
+	{
+		std::cout << "Destructing SpinningCubesGeometrySet" << std::endl;
+	}
 	void Draw(Shader* shader) 
 	{
 		glm::vec3 cubePositions[] = {
@@ -25,7 +33,6 @@ public:
 			glm::vec3(-1.3f, 1.0f, -1.5f)
 		};
 
-		Cube ExampleCube;
 		ExampleCube.Bind();
 
 		glm::mat4 identityTransform = glm::mat4(1.0f);
@@ -44,4 +51,5 @@ public:
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 	}
+	Cube ExampleCube;
 };

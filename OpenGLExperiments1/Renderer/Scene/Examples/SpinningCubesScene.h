@@ -10,13 +10,19 @@ class SpinningCubesScene : public Scene
 public:
 	SpinningCubesScene(Window& window) : Scene { window }, window { window }
 	{
+		std::cout << "Constructed SpinningCubesScene" << std::endl;
 		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
 	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
 		UpdateShaderFromCamera();
 
 		// TODO: better way of initialising this?
+		std::cout << "Populating ShaderGroup" << std::endl;
 		ShaderGroups.assign(1, ShaderGroup(&shader, &geo));
+	}
+	~SpinningCubesScene()
+	{
+		std::cout << "Destructed SpinningCubesScene" << std::endl;
 	}
 
 	void Render(std::vector<double>& mousePos) override

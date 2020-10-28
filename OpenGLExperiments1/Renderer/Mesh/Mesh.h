@@ -5,6 +5,14 @@
 class Mesh
 {
 public:
+	Mesh()
+	{
+		std::cout << "Constructing Mesh" << std::endl;
+	}
+	~Mesh()
+	{
+		std::cout << "Constructing Mesh" << std::endl;
+	}
 	void Bind()
 	{
 		unsigned int vertexArrayObject;

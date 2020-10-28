@@ -7,6 +7,7 @@ class Cube : public Mesh
 public:
 	Cube()
 	{
+		std::cout << "Constructing Cube" << std::endl;
 		vertices = {
 			-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 			0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
@@ -51,4 +52,9 @@ public:
 			-0.5f, 0.5f, -0.5f, 0.0f, 1.0f
 		};
 	};
+
+	~Cube()
+	{
+		std::cout << "Destructing Cube" << std::endl;
+	}
 };
