@@ -13,7 +13,7 @@ public:
 		window { window },
 		shader { Shader { "../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader" } },
 		geo { SpinningCubesGeometrySet {} },
-		shaderGroup { ShaderGroup{ &shader, &geo } }
+		shaderGroup { ShaderGroup { &shader, &geo } }
 	{
 		std::cout << "Constructed SpinningCubesScene" << std::endl;
 		// TODO: create default example shader
@@ -23,7 +23,7 @@ public:
 
 		// TODO: better way of initialising this?
 		std::cout << "Populating ShaderGroup" << std::endl;
-		ShaderGroups.assign(1, shaderGroup);
+		ShaderGroups.assign(1, &shaderGroup);
 	}
 
 	~SpinningCubesScene()
