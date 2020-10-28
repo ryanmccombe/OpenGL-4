@@ -8,7 +8,12 @@
 class SpinningCubesScene : public Scene
 {
 public:
-	SpinningCubesScene(Window& window) : Scene { window }, window { window }
+	SpinningCubesScene(Window& window) :
+		Scene { window },
+		window { window },
+		shader { Shader { "../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader" } },
+		geo { SpinningCubesGeometrySet {} },
+		shaderGroup { ShaderGroup{ &shader, &geo } }
 	{
 		std::cout << "Constructed SpinningCubesScene" << std::endl;
 		// TODO: create default example shader
@@ -18,8 +23,9 @@ public:
 
 		// TODO: better way of initialising this?
 		std::cout << "Populating ShaderGroup" << std::endl;
-		ShaderGroups.assign(1, ShaderGroup(&shader, &geo));
+		ShaderGroups.assign(1, shaderGroup);
 	}
+
 	~SpinningCubesScene()
 	{
 		std::cout << "Destructed SpinningCubesScene" << std::endl;
@@ -39,8 +45,7 @@ public:
 	}
 
 	Window& window;
-
-	// TODO: better way of initialising this?
-	Shader shader = Shader("../../Renderer/Shader/vertex.shader", "../../Renderer/Shader/fragment.shader");
+	Shader shader;
 	SpinningCubesGeometrySet geo;
+	ShaderGroup shaderGroup;
 };
