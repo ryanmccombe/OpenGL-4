@@ -14,7 +14,7 @@ public:
 		shader = _shader;
 		geo = _geo;
 	}
-	void Render()
+	void Render(std::vector<double> mousePos)
 	{
 		shader->Use();
 		geo->Draw(shader);
@@ -27,12 +27,12 @@ public:
 class Scene
 {
 public:
-	virtual void Render(double mousePos[3])
+	virtual void Render(std::vector<double>& mousePos)
 	{
 		if(!ShaderGroups.empty())
 		{
 			// TODO: render all groups
-			ShaderGroups[0].Render();
+			ShaderGroups[0].Render(mousePos);
 		} else {
 			// TODO: implement logging system
 			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;

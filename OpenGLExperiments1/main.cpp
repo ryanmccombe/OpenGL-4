@@ -9,7 +9,7 @@
 #include "stb_image.h"
 
 // xpos, ypos, YScrollOffset
-double mousePos[3] = {0,0,0.5f};
+std::vector<double> mousePos = {0,0,0.5f};
 
 void render(Window*, Scene*);
 

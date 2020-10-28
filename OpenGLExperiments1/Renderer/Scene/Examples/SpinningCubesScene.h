@@ -20,7 +20,7 @@ public:
 		ShaderGroups.assign(1, ShaderGroup(&shader, &geo));
 	}
 
-	void Render(double mousePos[3]) override
+	void Render(std::vector<double>& mousePos) override
 	{
 		Scene::Render(mousePos);
 		Camera.ProcessInput(window);

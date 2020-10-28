@@ -36,7 +36,7 @@ public:
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	}
 
-	void Update(double mousePos[3]) {
+	void Update(std::vector<double> mousePos) {
 		double xpos = mousePos[0];
 		double ypos = mousePos[1];
 		double scrollYOffset = mousePos[2];
