@@ -7,13 +7,14 @@
 // TODO: move to texture.h
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "Log.h"
 
 // xpos, ypos, YScrollOffset
 std::vector<double> mousePos = {0,0,0.5f};
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	// std::cout << "mouse callback" << std::endl;
+	LOG_TRACE("mouse callback");
 	mousePos[0] = xpos;
 	mousePos[1] = ypos;
 }
@@ -38,6 +39,8 @@ void render(Window& window, Scene& scene)
 
 int main()
 {
+	Log::Init();
+	LOG_INFO("Logger Initialised");
 	Window window {};
 	SpinningCubesScene Scene { window };
 

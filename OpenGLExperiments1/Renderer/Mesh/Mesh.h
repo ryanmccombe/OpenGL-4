@@ -1,17 +1,18 @@
 #pragma once
 #include <glad/glad.h>
 #include <vector>
+#include "../../Log.h"
 
 class Mesh
 {
 public:
 	Mesh()
 	{
-		std::cout << "Constructing Mesh" << std::endl;
+		LOG_INFO("Constructing Mesh");
 	}
 	~Mesh()
 	{
-		std::cout << "Constructing Mesh" << std::endl;
+		LOG_INFO("Constructing Mesh");
 	}
 	void Bind()
 	{

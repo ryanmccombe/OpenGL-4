@@ -6,17 +6,18 @@
 #include "../../../Window/window.h"
 #include "../../Mesh/Examples/Cube.h"
 #include "../GeometrySet.h"
+#include "../../../Log.h"
 
 class SpinningCubesGeometrySet : public GeometrySet
 {
 public:
 	SpinningCubesGeometrySet()
 	{
-		std::cout << "Constructing SpinningCubesGeometrySet" << std::endl;
+		LOG_INFO("Constructing SpinningCubesGeometrySet");
 	}
 	~SpinningCubesGeometrySet()
 	{
-		std::cout << "Destructing SpinningCubesGeometrySet" << std::endl;
+		LOG_INFO("Destructing SpinningCubesGeometrySet");
 	}
 	void Draw(Shader& shader) override
 	{

@@ -4,14 +4,14 @@
 #include "../Camera.h"
 #include <iostream>
 #include <cmath>
+#include "../../../Log.h"
 
 class FPSCamera : public Camera
 {
 public:
 	FPSCamera(Window& window) : window { window }
 	{
-		std::cout << "Constructed spinning camera" << std::endl;
-		// Update(std::pair<double, double>{0, 0});
+		LOG_INFO("Constructed spinning camera");
 	}
 
 	Window& window;
@@ -40,7 +40,7 @@ public:
 		double xpos = mousePos[0];
 		double ypos = mousePos[1];
 		double scrollYOffset = mousePos[2];
-		// std::cout << xpos << " | " << ypos << " | " << scrollYOffset << std::endl;
+		LOG_TRACE("{0} | {1} | {2}", xpos, ypos, scrollYOffset);
 		
 		float xoffset = (xpos - lastX);
 		float yoffset = (lastY - ypos); // reversed since y-coordinates range from bottom to top
@@ -68,7 +68,7 @@ public:
 
 		zoom = (10.f * (1.0 - scrollYOffset)) + (90.f * scrollYOffset);
 
-		// std::cout << scrollYOffset << " | " << zoom << std::endl;
+		LOG_TRACE("{0} | {1}", scrollYOffset, zoom);
 		
 		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		projection = glm::perspective(glm::radians(zoom), 800.0f / 600.0f, 0.1f, 100.0f);

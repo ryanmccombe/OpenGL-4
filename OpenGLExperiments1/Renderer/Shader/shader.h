@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include "../Texture/texture.h"
+#include "../../Log.h"
 
 class Shader
 {
@@ -13,7 +14,7 @@ public:
 
 	Shader(const char* vertexPath, const char* fragmentPath)
 	{
-		std::cout << "Constructing Shader" << std::endl;
+		LOG_INFO("Constructing Shader");
 		
 		// 1. retrieve the vertex/fragment source code from filePath
 		std::ifstream vShaderFile;
@@ -42,7 +43,7 @@ public:
 		}
 		catch (std::ifstream::failure e)
 		{
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			LOG_ERROR("ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ");
 		}
 
 		// TODO: manage this dynamically
@@ -52,7 +53,7 @@ public:
 
 	void Use() const
 	{
-		// std::cout << "using shader" << ID << std::endl;
+		LOG_TRACE("using shader {0}", ID);
 		glUseProgram(ID);
 	}
 
@@ -124,12 +125,12 @@ private:
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
-				std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog <<
-					"\n -- --------------------------------------------------- -- " << std::endl;
+				LOG_ERROR("ERROR::SHADER_COMPILATION_ERROR of type: {0}", type);
+				LOG_ERROR(infoLog);
 			}
 			else
 			{
-				std::cout << "Successfully compiled " << type << " shader" << std::endl;
+				LOG_INFO("Successfully compiled {0} shader", type);
 			}
 		}
 		else
@@ -138,12 +139,12 @@ private:
 			if (!success)
 			{
 				glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
-				std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog <<
-					"\n -- --------------------------------------------------- -- " << std::endl;
+				LOG_ERROR("ERROR::PROGRAM_LINKING_ERROR of type: {0}", type);
+				LOG_ERROR(infoLog);
 			}
 			else
 			{
-				std::cout << "Successfully linked program" << std::endl;
+				LOG_INFO("Successfully linked program");
 			}
 		}
 	}

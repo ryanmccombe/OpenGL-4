@@ -1,0 +1,3 @@
+[submodule "OpenGLExperiments1/vendor/spdlog"]
+	path = OpenGLExperiments1/vendor/spdlog
+	url = https://github.com/gabime/spdlog

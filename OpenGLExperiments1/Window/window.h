@@ -82,7 +82,7 @@ private:
 		const auto loadProc = GLADloadproc(glfwGetProcAddress);
 		if (!gladLoadGLLoader(loadProc))
 		{
-			std::cout << "Failed to initialize GLAD" << std::endl;
+			LOG_ERROR("Failed to initialize GLAD");
 		}
 }
 };

@@ -15,20 +15,20 @@ public:
 		geo { SpinningCubesGeometrySet {} },
 		shaderGroup { ShaderGroup { shader, geo } }
 	{
-		std::cout << "Constructed SpinningCubesScene" << std::endl;
+		LOG_INFO("Constructed SpinningCubesScene");
 		// TODO: create default example shader
 	    shader.AddTexture("../../Renderer/Texture/container.jpg");
 	    shader.AddTexture("../../Renderer/Texture/thinking.png", GL_RGBA, GL_TEXTURE1);
 		UpdateShaderFromCamera();
 
 		// TODO: better way of initialising this?
-		std::cout << "Populating ShaderGroup" << std::endl;
+		LOG_INFO("Populating ShaderGroup");
 		ShaderGroups.assign(1, &shaderGroup);
 	}
 
 	~SpinningCubesScene()
 	{
-		std::cout << "Destructed SpinningCubesScene" << std::endl;
+		LOG_INFO("Destructed SpinningCubesScene");
 	}
 
 	void Render(std::vector<double>& mousePos) override

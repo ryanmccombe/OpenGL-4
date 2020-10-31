@@ -1,13 +1,14 @@
 #pragma once
 #include "../Mesh.h"
 #include <vector>
+#include "../../../Log.h"
 
 class Cube : public Mesh
 {
 public:
 	Cube()
 	{
-		std::cout << "Constructing Cube" << std::endl;
+		LOG_INFO("Constructing Cube");
 		vertices = {
 			-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 			0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
@@ -55,6 +56,6 @@ public:
 
 	~Cube()
 	{
-		std::cout << "Destructing Cube" << std::endl;
+		LOG_INFO("Destructing Cube");
 	}
 };

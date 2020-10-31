@@ -2,13 +2,14 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "../Camera.h"
+#include "../../../Log.h"
 
 class SpinningCamera : public Camera
 {
 public:
 	SpinningCamera()
 	{
-		std::cout << "Constructed spinning camera" << std::endl;
+		LOG_INFO("Constructed spinning camera");
 		Update();
 	}
 

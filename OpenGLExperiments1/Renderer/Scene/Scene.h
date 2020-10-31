@@ -11,7 +11,7 @@ public:
 	ShaderGroup(Shader& shader, GeometrySet& geo) : shader { shader }, geo { geo} { }
 	~ShaderGroup()
 	{
-		std::cout << "Destructed ShaderGroup" << std::endl;
+		LOG_INFO("Destructed ShaderGroup");
 	}
 	void Render()
 	{
@@ -28,11 +28,11 @@ class Scene
 public:
 	Scene(Window& window) : Camera { FPSCamera { window }}
 	{
-		std::cout << "Constructed Scene" << std::endl;
+		LOG_INFO("Constructed Scene");
 	}
 	~Scene()
 	{
-		std::cout << "Destructed Scene" << std::endl;
+		LOG_INFO("Destructed Scene");
 	}
 	virtual void Render(std::vector<double>& mousePos)
 	{
@@ -42,7 +42,7 @@ public:
 			ShaderGroups[0]->Render();
 		} else {
 			// TODO: implement logging system
-			std::cout << "Render Sets size is " << ShaderGroups.size() << std::endl;
+			LOG_WARN("Render Sets size is {0}", ShaderGroups.size());
 		}
 		Camera.Update(mousePos);
 	}

@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <stb_image.h>
 #include <iostream>
+#include "../../Log.h"
 
 class Texture
 {
@@ -33,7 +34,7 @@ public:
 		unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			std::cout << "Loaded texture" << std::endl;
+			LOG_INFO("Loaded texture");
 
 			// Load the image data into the texture, and generate mipmaps
 			glTexImage2D(GL_TEXTURE_2D, 0, dataType, width, height, 0, dataType, GL_UNSIGNED_BYTE, data);
@@ -41,7 +42,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Failed to load texture" << std::endl;
+			LOG_ERROR("Failed to load texture");
 		}
 
 		// Free the image memory

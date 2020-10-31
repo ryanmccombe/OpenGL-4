@@ -1,14 +1,16 @@
 #pragma once
+#include "../../Log.h"
+
 class GeometrySet
 {
 public:
 	GeometrySet()
 	{
-		std::cout << "Constructing GeometrySet" << std::endl;
+		LOG_INFO("Constructing GeometrySet");
 	}
 	~GeometrySet()
 	{
-		std::cout << "Destructing GeometrySet" << std::endl;
+		LOG_INFO("Destructing GeometrySet");
 	}
 	virtual void Draw(Shader& shader) {};
 };
